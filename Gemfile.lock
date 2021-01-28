@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    livelist (0.0.4)
+    livelist (0.1.4)
 
 GEM
   remote: https://rubygems.org/

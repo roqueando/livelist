@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
 module Livelist
-  # Initialize and separate by headers and segments
-  # all playlist files
+  # A Playlist m3u8
   class Playlist
+    # @param path [String] where will be the final m3u8
+    #
+    # @param options [Hash] all options allowed 
+    # @option options [Integer] :version playlist version defaults 1
+    # @option options [Boolean] :allow playlist allow cache defaults false
+    # @option options [Integer] :target_duration playlist target duration in seconds defaults 10
+    #
+    # @raise [Exceptions::InvalidFormat] invalid format if file is not a .m3u8
     def initialize(path, options = {})
       @path = path
       @options = options
@@ -11,6 +18,35 @@ module Livelist
       raise Exceptions::InvalidFormat unless File.extname(path) == '.m3u8'
     end
 
+    def path
+      @path
+    end
+
+    # Write the m3u8 file
+    def write
+      File.open(@path, 'w') do |file|
+        [
+          @tag,
+          version,
+          media_sequence,
+          allow_cache?,
+          target_duration
+        ].each { |tag| file.puts tag }
+      end
+    end
+
+    # Return a string version of m3u8 file
+    def to_s
+      [
+        @tag,
+        version,
+        media_sequence,
+        allow_cache?,
+        target_duration
+      ].join("\n")
+    end
+
+    private
     def version
       "#EXT-X-VERSION:#{@options[:version] ||= 1}"
     end
@@ -26,32 +62,5 @@ module Livelist
     def media_sequence
       "#EXT-X-MEDIA-SEQUENCE:0"
     end
-
-    def path
-      @path
-    end
-
-    def write
-      File.open(@path, 'w') do |file|
-        [
-          @tag,
-          version,
-          media_sequence,
-          allow_cache?,
-          target_duration
-        ].each { |tag| file.puts tag }
-      end
-    end
-
-    def to_s
-      [
-        @tag,
-        version,
-        media_sequence,
-        allow_cache?,
-        target_duration
-      ].join("\n")
-    end
   end
-
 end

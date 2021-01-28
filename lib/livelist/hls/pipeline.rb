@@ -15,6 +15,7 @@ module Livelist
 
       # Run the pipeline to HTTP streaming
       # @param [String] segment_name
+      # @return [void]
       def run(segment_name)
         create_playlist
         append_segment(segment_name)
@@ -28,6 +29,7 @@ module Livelist
 
       # Append a segment to playlist file
       # the segment name can be a URL or a simple file
+      #
       # @param [String] segment_name
       def append_segment(segment_name)
         Livelist::Sequence.new(@playlist)
@@ -35,7 +37,6 @@ module Livelist
         Livelist::Segment.new(segment_name, @options[:target_duration].to_f)
           .hls_append(@playlist)
       end
-
     end
   end
 end
