@@ -1,14 +1,13 @@
 PATH
   remote: .
   specs:
-    livelist (0.0.1)
+    livelist (0.0.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
     diff-lcs (1.4.4)
     rake (12.3.3)
-    require_all (3.0.0)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -29,7 +28,6 @@ PLATFORMS
 DEPENDENCIES
   livelist!
   rake (~> 12.0)
-  require_all
   rspec (~> 3.0)
 
 BUNDLED WITH

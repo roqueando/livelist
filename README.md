@@ -24,9 +24,19 @@ You can use Livelist separately with `Livelist::Playlist`, `Livelist::Segment` a
 
 TODO: put an example
 
-Or use a specific module to HLS or VOD: `Livelist::HLS`, `Livelist::VOD`
+Or use a specific module to HLS: `Livelist::HLS`
 
-TODO: put an example with HLS and VOD
+```ruby
+require 'livelist'
+
+# That path index.m3u8 is where that
+# file will be created
+Livelist::HLS::Pipeline
+    .new('path/to/index.m3u8')
+    .run('segment.ts')
+```
+
+The logic is to work as a production pipeline, passing where will stay the final .m3u8 and which file will be faceted.
 
 ## Contributing
 

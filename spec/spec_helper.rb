@@ -11,4 +11,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+  config.after(:all) do
+    file = 'spec/output/index.m3u8'
+    File.delete(file) if File.exist? file
+  end
 end
