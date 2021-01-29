@@ -50,7 +50,7 @@ module Livelist
     # @param context [Array] an array containing tag and segment
     # @return [Array] updated array without tag and segment
     def remove_tag_and_segment(context)
-      if context.grep(/#EXTINF:[0-9]+/).length > 1
+      if context.grep(/#EXTINF:[0-9]+/).length > 2
         context.delete_at 5
         context.delete_at 5
       end
