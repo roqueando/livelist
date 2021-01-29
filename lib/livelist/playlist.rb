@@ -56,11 +56,11 @@ module Livelist
     end
 
     def target_duration
-      "#EXT-X-TARGET-DURATION:#{@options[:target_duration] ||= 10}"
+      "#EXT-X-TARGETDURATION:#{@options[:target_duration] ||= 10}"
     end
 
     def media_sequence
-      "#EXT-X-MEDIA-SEQUENCE:0"
+      '#EXT-X-MEDIA-SEQUENCE:0'
     end
   end
 end
