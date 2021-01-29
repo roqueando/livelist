@@ -22,9 +22,10 @@ module Livelist
       end
 
       private
+
       # Write the playlist file
       def create_playlist
-        return @playlist.write unless File.exist? @path
+        @playlist.write unless File.exist? @path
       end
 
       # Append a segment to playlist file
@@ -32,9 +33,11 @@ module Livelist
       #
       # @param [String] segment_name
       def append_segment(segment_name)
-        Livelist::Sequence.new(@playlist)
+        Livelist::Sequence
+          .new(@playlist)
           .add
-        Livelist::Segment.new(segment_name, @options[:target_duration].to_f)
+        Livelist::Segment
+          .new(segment_name, @options[:target_duration].to_f)
           .hls_append(@playlist)
       end
     end

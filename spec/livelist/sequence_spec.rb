@@ -8,7 +8,7 @@ RSpec.describe Livelist::Sequence do
     @playlist.write
   end
 
-  it 'should add new sequence to the playlist', focus: true do
+  it 'should add new sequence to the playlist' do
     Livelist::Sequence.new(@playlist)
       .add
 

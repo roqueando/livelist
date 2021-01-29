@@ -14,15 +14,15 @@ module Livelist
     #
     # @param [Livelist::Playlist] playlist
     def append(playlist)
-      return write(playlist) if File.exist? playlist.path
+      write(playlist) if File.exist? playlist.path
     end
 
-    # Append a new segment but removing 
+    # Append a new segment but removing
     # the previous segment from playlist
     #
     # @param [Livelist::Playlist] playlist
     def hls_append(playlist)
-      return hls_write(playlist) if File.exist? playlist.path
+      hls_write(playlist) if File.exist? playlist.path
     end
 
     private
@@ -39,6 +39,7 @@ module Livelist
 
     # @param [Livelist::Playlist] playlist
     def hls_write(playlist)
+      append(playlist)
       segment = File.open(playlist.path, 'r') do |file|
         context = file.readlines.map(&:chomp)
         remove_tag_and_segment(context)
@@ -48,9 +49,11 @@ module Livelist
 
     # @param context [Array] an array containing tag and segment
     # @return [Array] updated array without tag and segment
-    def remove_tag_and_segment(context) 
-      context.delete_at 5
-      context.delete_at 5
+    def remove_tag_and_segment(context)
+      if context.grep(/#EXTINF:[0-9]+/).length > 1
+        context.delete_at 5
+        context.delete_at 5
+      end
       context
     end
   end
