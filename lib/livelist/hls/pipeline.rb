@@ -38,7 +38,7 @@ module Livelist
           .add
         Livelist::Segment
           .new(segment_name, @options[:target_duration].to_f)
-          .hls_append(@playlist)
+          .append(@playlist)
       end
     end
   end

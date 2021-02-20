@@ -13,13 +13,18 @@ RSpec.describe Livelist::HLS::Pipeline do
         .new(filename, target_duration: 2)
         .run('test1.ts')
     end
-    it 'should media sequence add 1 and remains 1 segment', focus: true do
+    it 'should media sequence add 1 and remains 1 segment' do
       run_pipeline
       file_line = File.open(filename, 'r') do |f|
         f.find_all { |line| line =~ /#EXTINF:/ }
       end
 
       expect(file_line.length).to be > 0
+    end
+
+    it 'should get current time in seconds' do
+      current_time = Livelist::HLS.current_time(filename)
+      expect(current_time).to eq(4)
     end
   end
 end
