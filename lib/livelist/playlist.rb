@@ -27,10 +27,11 @@ module Livelist
       File.open(@path, 'w') do |file|
         [
           @tag,
+          type,
           version,
           media_sequence,
           allow_cache?,
-          target_duration
+          target_duration,
         ].each { |tag| file.puts tag }
       end
     end
@@ -61,6 +62,10 @@ module Livelist
 
     def media_sequence
       '#EXT-X-MEDIA-SEQUENCE:0'
+    end
+
+    def type
+      "#EXT-X-PLAYLIST-TYPE:#{@options[:type] ||= 'EVENT'}"
     end
   end
 end

@@ -33,9 +33,6 @@ module Livelist
       #
       # @param [String] segment_name
       def append_segment(segment_name)
-        Livelist::Sequence
-          .new(@playlist)
-          .add
         Livelist::Segment
           .new(segment_name, @options[:target_duration].to_f)
           .append(@playlist)
