@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    livelist (0.1.4)
+    livelist (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -31,4 +31,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   2.1.4
+   2.2.15
