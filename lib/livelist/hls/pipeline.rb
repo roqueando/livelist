@@ -35,7 +35,7 @@ module Livelist
       def append_segment(segment_name)
         Livelist::Segment
           .new(segment_name, @options[:target_duration].to_f)
-          .append(@playlist)
+          .hls_append(@playlist)
       end
     end
   end

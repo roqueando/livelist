@@ -13,9 +13,15 @@ RSpec.describe Livelist::HLS::Pipeline do
       Livelist::HLS::Pipeline
         .new(filename, target_duration: 2)
         .run('test1.ts')
+      Livelist::HLS::Pipeline
+        .new(filename, target_duration: 2)
+        .run('test3.ts')
+      Livelist::HLS::Pipeline
+        .new(filename, target_duration: 2)
+        .run('test4.ts')
     end
 
-    it 'should media sequence not add ' do
+    it 'should media sequence add after three' do
       run_pipeline
       file_line = File.open(filename, 'r') do |f|
         f.find_all { |line| line =~ /#EXTINF:/ }
@@ -26,7 +32,7 @@ RSpec.describe Livelist::HLS::Pipeline do
 
       _tag, number = sequence_line.strip.split(':')
       expect(file_line.length).to be > 0
-      expect(number).to eq('0')
+      expect(number.to_i).to be > 0
     end
 
     it 'should create a HLS event type' do

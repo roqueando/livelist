@@ -53,6 +53,9 @@ module Livelist
       if context.grep(/#EXTINF:[0-9]+/).length > 2
         context.delete_at 5
         context.delete_at 5
+        tag, number = context[3].strip.split(':')
+        number = number.to_i + 1
+        context[3] = "#{tag}:#{number}"
       end
       context
     end
